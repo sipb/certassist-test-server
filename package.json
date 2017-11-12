@@ -1,0 +1,12 @@
+{
+  "name": "certassist-test-server",
+  "version": "1.0.0",
+  "description": "Test server for mocking ca.mit.edu",
+  "main": "index.js",
+  "author": "Anders Kaseorg",
+  "license": "MIT",
+  "dependencies": {
+    "node-forge": "^0.7.1",
+    "xml-escape": "^1.1.0"
+  }
+}
