@@ -29,7 +29,7 @@ function handleRequest(request, response) {
 const server = https.createServer({
     key: fs.readFileSync('certs/web.key'),
     cert: fs.readFileSync('certs/web.crt'),
-    ca: fs.readFileSync('certs/client.crt'),
+    ca: fs.readFileSync('certs/client.crt') + fs.readFileSync('certs/client-chained.crt') + fs.readFileSync('certs/root.crt'),
     requestCert: true,
     rejectUnauthorized: true,
 }, handleRequest);
