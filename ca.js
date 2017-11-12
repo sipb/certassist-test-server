@@ -36,13 +36,13 @@ function maxExpires() {
     return new Date(Date.UTC(tmp.getUTCFullYear(), 7, 1, 12));
 }
 
-const users = {
-    'foo': {
+const users = new Map([
+    ['foo', {
         fullname: 'Foo Bar',
         password: 'bar',
         mitid: '999999999',
-    },
-}
+    }],
+]);
 
 function validLogin(login) {
     return login == 'foo';
@@ -153,7 +153,7 @@ const operations = {
             return showError(response, 5, 'Required Parameter Missing');
         if (!(cmd.sessionid in sessions))
             return showError(response, 6, 'Invalid Session');
-        const user = users[cmd.login];
+        const user = users.get(cmd.login);
         if (!user)
             return showError(response, 8, 'Principal does not exist');
         if (cmd.password !== user.password)
@@ -190,7 +190,7 @@ const operations = {
         notAfter.setTime(Math.min(Math.max(expiration, now + 60 * 60 * 1000), maxExpires()));
         const pkcs12 = await generateCert({
             login: login,
-            user: users[login],
+            user: users.get(login),
             notBefore: notBefore,
             notAfter: notAfter,
             downloadpassword: cmd.downloadpassword
