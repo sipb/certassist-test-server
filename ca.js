@@ -64,7 +64,10 @@ async function generateCert(args) {
     cert.setIssuer(clientCaCert.subject.attributes);
     cert.setSubject([...clientCaCert.subject.attributes, {
         name: 'commonName',
-        value: `${args.user.fullname}/emailAddress=${args.login}@testca.test`,
+        value: args.user.fullname,
+    }, {
+        name: 'emailAddress',
+        value: `${args.login}@testca.test`,
     }]);
     cert.validity.notBefore = args.notBefore;
     cert.validity.notAfter = args.notAfter;
