@@ -44,18 +44,6 @@ const users = new Map([
     }],
 ]);
 
-function validLogin(login) {
-    return login == 'foo';
-}
-
-function validPassword(login, password) {
-    return password == 'bar';
-}
-
-function validMitId(login, mitid) {
-    return mitid == '999999999';
-}
-
 async function generateCert(args) {
     const cert = forge.pki.createCertificate();
 
