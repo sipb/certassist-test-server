@@ -190,18 +190,11 @@ async function generateCert(args) {
     cert.sign(clientCaKey, forge.md.sha256.create());
 
     const p7 = forge.pkcs7.createSignedData();
+    p7.content = '';
     p7.addCertificate(cert);
     p7.addCertificate(clientCaCert);
     p7.addCertificate(pki.certificateFromPem(fs.readFileSync('certs/root.crt')));
-
-    const a1 = p7.toAsn1();
-    const contentType = a1.value[1].value[0].value[2].value[0];
-    if (contentType.value !== asn1.oidToDer(forge.oids.data).getBytes())
-        throw new Error("Unexpected ContentType");
-    // Replicate CSAIL invalid ContentType bug
-    contentType.value = asn1.oidToDer('0.0').getBytes();
-
-    return asn1.toDer(a1).getBytes();
+    return asn1.toDer(p7.toAsn1()).getBytes();
 }
 
 function authenticate(request) {
