@@ -254,7 +254,7 @@ server.on('connection', socket => {
 });
 
 server.on('clientError', (exception, socket) => {
-    console.log(`client error ${exception} on [${socket.remoteAddress}]:socket.remotePort`);
+    console.log(`client error ${exception} on [${socket.remoteAddress}]:${socket.remotePort}`);
 });
 
 server.on('listening', () => {
