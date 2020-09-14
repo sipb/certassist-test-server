@@ -6,7 +6,7 @@
   "author": "Anders Kaseorg",
   "license": "MIT",
   "dependencies": {
-    "node-forge": "^0.7.1",
+    "node-forge": "^0.10.0",
     "xml-escape": "^1.1.0"
   }
 }
